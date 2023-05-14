@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package example_proto;
+option go_package = "github.com/pobo380/techbookfest-14-example/example_proto";
+
+import "google/protobuf/descriptor.proto";
+
+message ExampleMessage {
+  uint64 user_id  = 1;
+  string nickname = 2;
+  string address  = 3 [(sensitive) = true];
+}
+
+message AdvancedExampleMessage {
+  ExampleMessage              child     = 1;
+  repeated ExampleMessage     children  = 2;
+  map<string, ExampleMessage> map_field = 3;
+}
+
+extend google.protobuf.FieldOptions {
+  bool sensitive = 60000;
+}
